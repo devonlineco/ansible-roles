@@ -1,0 +1,22 @@
+---
+- name: Install dependencies
+  apt:
+    pkg: ["git", "curl", "build-essential", "libssl-dev"]
+    update_cache: yes
+    cache_valid_time: 3600
+  become: true
+  tags: nvm
+
+- name: Install nvm {{ nvm_version }}
+  git:
+    repo: https://github.com/creationix/nvm.git
+    dest: "{{ nvm_install_path }}"
+    version: "{% if nvm_version!='HEAD' %}v{% endif %}{{ nvm_version }}"
+  tags: nvm
+
+- name: Source nvm in ~/.zshrc
+  lineinfile:
+    dest: ~/.zshrc
+    line: . {{ nvm_install_path }}/nvm.sh
+    create: yes
+  tags: nvm

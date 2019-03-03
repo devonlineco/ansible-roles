@@ -1,0 +1,34 @@
+---
+language: python
+python: "2.7"
+
+sudo: required
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
+
+install:
+  - pip install ansible
+
+script:
+  # Check syntax
+  - ansible-playbook -i "localhost," test.yml --syntax-check
+
+  # First run
+  - ansible-playbook -i "localhost," -c local test.yml --extra-vars "nvm_install_path=~/.nvmbis"
+
+  # Second run
+  - >
+    ansible-playbook -i "localhost," -c local test.yml --extra-vars "nvm_install_path=~/.nvmbis"
+    | grep -q 'changed=0.*failed=0'
+    && (echo 'Idempotence test: pass' && exit 0)
+    || (echo 'Idempotence test: fail' && exit 1)
+
+  # Source nvm
+  - . ~/.profile
+
+  # Check nvm version
+  - nvm --version | grep 0.31.5
+
+  # Check Node.js version
+  - node --version | grep 6.9.1

@@ -1,0 +1,8 @@
+---
+- name: Test playbook for nvm role
+  hosts: all
+
+  roles:
+    - role: ansible-nvm
+      nvm_version: 0.31.5
+      nvm_node_version: 6.9.1

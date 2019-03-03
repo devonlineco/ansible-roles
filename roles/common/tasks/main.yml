@@ -29,6 +29,20 @@
       shell: /bin/bash       # Defaults to /bin/bash
       createhome: yes        # Defaults to yes
 
+  - name: Creates shh directory
+    file:
+      path: "/home/{{ user }}/.ssh"
+      state: directory
+      owner: "{{ user }}"
+      group: "{{ user }}"
+
+  - name: Authorized Keys
+    template:
+      src: authorized_keys.j2
+      dest: "/home/{{ user }}/.ssh/authorized_keys"
+      owner: "{{ user }}"
+      group: "{{ user }}"
+      mode: 0644
 
   - meta: flush_handlers
   rescue:

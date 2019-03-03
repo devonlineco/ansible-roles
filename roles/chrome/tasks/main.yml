@@ -1,0 +1,19 @@
+---
+# Variable setup.
+- name: Include OS-specific variables.
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- name: Define chrome_package.
+  set_fact:
+    chrome_package: "{{ __chrome_package }}"
+  when: chrome_package is not defined
+
+# Setup/install tasks.
+- include: setup.yml
+  static: no
+  when: ansible_architecture == 'x86_64'
+
+# Setup/install tasks.
+- include: configure.yml
+  static: no
+  when: ansible_architecture == 'x86_64'

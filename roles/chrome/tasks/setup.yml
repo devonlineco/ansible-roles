@@ -1,0 +1,16 @@
+---
+- include: setup-Debian.yml
+  when: ansible_os_family == 'Debian'
+  static: no
+
+- name: Delete package file
+  file:
+    dest: "/tmp/{{ chrome_package }}"
+    state: absent
+
+- name: Disable Google Chrome GPU acceleration
+  replace:
+    dest: /usr/share/applications/google-chrome.desktop
+    regexp: '(^Exec=(?!.*--disable-gpu.*).*$)'
+    replace: '\1 --disable-gpu'
+  when: chrome_disable_gpu

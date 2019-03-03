@@ -51,6 +51,9 @@
       - xfce4
       - xfce4-goodies
       - screen
+      - mosh
+      - git
+      - expect
     sysctl:
       - item: fs.inotify.max_user_watches
         value: 524288

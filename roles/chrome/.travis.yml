@@ -1,0 +1,50 @@
+---
+services: docker
+
+branches:
+  only:
+    - master
+    - /^test\/.*$/
+
+env:
+  - distro: ubuntu1604
+    init: /lib/systemd/systemd
+    run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - distro: debian8
+    init: /lib/systemd/systemd
+    run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
+
+before_install:
+  # Pull container.
+  - 'docker pull geerlingguy/docker-${distro}-ansible:latest'
+
+script:
+  - container_id=$(mktemp)
+  # Run container in detached state.
+  - 'docker run --detach --volume="${PWD}":/etc/ansible/roles/role_under_test:ro ${run_opts} geerlingguy/docker-${distro}-ansible:latest "${init}" > "${container_id}"'
+
+  # Ansible syntax check.
+  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/role_under_test/tests/test.yml --syntax-check'
+
+  # Test role.
+  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/role_under_test/tests/test.yml'
+
+  # Test role idempotence.
+  - idempotence=$(mktemp)
+  - docker exec "$(cat ${container_id})" ansible-playbook /etc/ansible/roles/role_under_test/tests/test.yml | tee -a ${idempotence}
+  - >
+    tail ${idempotence}
+    | grep -q 'changed=0.*failed=0'
+    && (echo 'Idempotence test: pass' && exit 0)
+    || (echo 'Idempotence test: fail' && exit 1)
+
+  # Ensure Google Chrome is installed and working (still won't startup because there is no graphics environment)..
+  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm google-chrome || true'
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
+  slack:
+    rooms:
+      secure: Fz86GqnOdxD1G4634uyne2JD6el1csJeptJDeOaYCPsVIUL2dNP8kb0qAUuoT1TEUVrXpIbiCvnEsobXGcVw/vrrGLaQJedvB6UTZAU327Kf3wFr+Z/3xR/zUp8M9fNse6f+JkbN8BFSMjZkyNe6Xntu6OBPjy4Bv91Jrq0xWY5QoGTJx+7jtjsOyHdkfh/UOF+SJdRi/UDWktSJvILKvKRI14/tZti4BEyvDCB1otmH/3QWptXRSIwDtFa4FqbwTAtbdlMel73rfS0tGJI+7OgC54BvaP2aoYOok3pNcunu9xmrgMetR1JxLx0cCTCKaU6t4zBwLrwQl2inl0SNLXPu4WL1BdwPt90zvJbIPopdTrsf/XK4jgja3H47MumfZBxHV9GjCrsPukvXcA8SEoWutCqTyTgwGK+D2Cybc1gUezyDdtbMjhzXfo6WmVWPozGu8KXsD82uHq9P1ijawONGvmCJz/cMslwIuhZEAio5G9upeKOtmELgS072usLbp0WvKlDMnvIKRBnK1UGmKz/8najwLfMRKhIpWywMkY3potgVHTr1iW+VLhwnsw+BOrFP5wpSVi1LgD0cPiPCWUwKl/XaNU2NGKbvZw1pqU12W+RaBctjeibfTzUVHYZWUlXzMPk8cWC5LPEUZQ2n10g/f/bzlidn1BqLUdyMgwI=
+    on_success: change
+    on_failure: always

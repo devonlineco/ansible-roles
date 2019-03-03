@@ -1,0 +1,22 @@
+---
+galaxy_info:
+  author: Stephane de Wit (based on Jarno Keskikangas work)
+  description: Install nvm and Node.js.
+  company: stephanedewit.be
+  license: BSD
+  min_ansible_version: 2.0
+  platforms:
+    - name: Ubuntu
+      versions:
+        - all
+    - name: Debian
+      versions:
+        - all
+  galaxy_tags:
+    - nodejs
+    - node
+    - npm
+    - npx
+    - nvm
+
+dependencies: []

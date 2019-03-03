@@ -1,0 +1,11 @@
+---
+chrome_release_channel: 'stable'
+chrome_package_name: 'google-chrome-{{ chrome_release_channel }}'
+chrome_disable_gpu: false
+
+chrome_policies_managed: []
+chrome_policies_recommended: []
+chrome_policies_filename: 'policy.json'
+
+# Download URL
+chrome_download_url: 'https://dl.google.com/linux/direct/'

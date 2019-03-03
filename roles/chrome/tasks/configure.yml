@@ -1,0 +1,29 @@
+---
+- name: Create policy directories
+  file:
+    path: /etc/opt/chrome/policies/{{ item }}
+    state: directory
+    mode: 0755
+  with_items:
+    - managed
+    - recommended
+
+- name: Set Chrome policies
+  copy:
+    dest: /etc/opt/chrome/policies/{{ item.key }}/{{ chrome_policies_filename }}
+    mode: 0644
+    content: '{{ item.value|to_nice_json }}'
+  when: item.value|length > 0
+  with_dict:
+    managed: '{{ chrome_policies_managed }}'
+    recommended: '{{ chrome_policies_recommended }}'
+
+- name: Delete policy file if no policies are defined
+  file:
+    path: /etc/opt/chrome/policies/{{ item.key }}/{{ chrome_policies_filename }}
+    state: absent
+  when: item.value|length == 0
+  with_dict:
+    managed: '{{ chrome_policies_managed }}'
+    recommended: '{{ chrome_policies_recommended }}'
+

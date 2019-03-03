@@ -1,0 +1,22 @@
+---
+- name: Check Google Chrome version if installed
+  command: "dpkg-query -W {{ chrome_package_name }}"
+  register: _chrome_installed_version
+  changed_when: false
+  failed_when: false
+
+- name: Set decision to install Google Chrome
+  set_fact:
+    chrome_install: "{{ _chrome_installed_version.rc == 1 }}"
+
+- name: Download Google Chrome package
+  get_url:
+    url: "{{ chrome_download_url }}/{{ chrome_package }}"
+    dest: /tmp/
+  when: chrome_install
+
+- name: Install Google Chrome package
+  apt:
+    deb: "/tmp/{{ chrome_package }}"
+    state: present
+  when: chrome_install

@@ -1,0 +1,2 @@
+---
+__chrome_package: '{{ chrome_package_name }}_current_amd64.deb'

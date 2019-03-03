@@ -15,3 +15,10 @@
       tags: docker
     - role: vscode
       tags: vscode
+    - role: chrome
+      tags: chrome
+    - role: nvm
+      tags: tools
+      become_user: "{{ user }}"
+    - role: vnc
+      tags: tools
