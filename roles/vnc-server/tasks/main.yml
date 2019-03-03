@@ -13,9 +13,6 @@
   tags:
     - vnc
 
-- name: Run password script
-  shell: . /tmp/pass.sh
-
 - name: Creates vnc directory
   file:
     path: "/home/{{ user }}/.vnc"
@@ -24,6 +21,9 @@
     group: "{{ user }}"
   tags:
     - vnc
+
+- name: Run password script
+  shell: . /tmp/pass.sh
 
 - name: Copy xstartup script
   template: src=xstartup.j2 dest="/home/{{ user }}/.vnc/xstartup" mode=0744
