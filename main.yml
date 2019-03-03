@@ -1,0 +1,17 @@
+---
+- name: Configure the server and install required software
+  hosts: all
+  gather_facts: false
+  become: true
+  vars_files:
+    - config.cfg
+
+  roles:
+    - role: common
+      tags: common
+    - role: zsh
+      tags: zsh
+    - role: docker
+      tags: docker
+    - role: vscode
+      tags: vscode

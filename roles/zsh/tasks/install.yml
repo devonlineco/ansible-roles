@@ -1,0 +1,54 @@
+---
+
+- name: Install zsh, git, wget
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - zsh
+    - git
+    - wget
+  # brew don't work from root user on macOS
+  when: not (zsh_user == 'root' and ansible_os_family == 'Darwin')
+
+- name: Clone antigen {{ zsh_antigen_version }}
+  git:
+    repo: https://github.com/zsh-users/antigen.git
+    dest: "{{ zsh_antigen_path }}/antigen"
+    version: "{{ zsh_antigen_version }}"
+    force: yes
+  become: yes
+  become_user: "{{ zsh_user }}"
+  register: zsh_register_antigen_clone
+
+- name: Clone iwfmp/mc-solarized-skin
+  git:
+    repo: https://github.com/iwfmp/mc-solarized-skin.git
+    version: master
+    dest: "~{{ zsh_user }}/.mc/lib/mc-solarized"
+    force: yes
+  become: yes
+  become_user: "{{ zsh_user }}"
+  when: zsh_mc_solarized_skin and not zsh_shared
+
+- name: Check fzf installed
+  command: which fzf
+  changed_when: false
+  failed_when: false
+  register: zsh_register_fzf_command
+
+- name: Download fzf
+  unarchive:
+    src: "{{ zsh_fzf_url }}"
+    dest: /usr/local/bin
+    remote_src: yes
+    creates: /usr/local/bin/fzf
+  when: zsh_register_fzf_command.rc == 1
+
+- name: Set directory permissions
+  file:
+    name: "{{ zsh_antigen_path }}"
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+    recurse: yes
+  changed_when: false
