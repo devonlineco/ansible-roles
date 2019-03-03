@@ -54,6 +54,7 @@
       - mosh
       - git
       - expect
+      - xclip
     sysctl:
       - item: fs.inotify.max_user_watches
         value: 524288
