@@ -19,6 +19,5 @@
       tags: chrome
     - role: nvm
       tags: tools
-      become_user: "{{ user }}"
     - role: vnc
-      tags: tools
+      tags: vnc
