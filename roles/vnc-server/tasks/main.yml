@@ -1,0 +1,29 @@
+---
+- name: tigervnc-standalone-server | install
+  apt: pkg="tigervnc-standalone-server" state="present"
+  retries: 3
+  register: result
+  until: not result.failed
+  become: yes
+  tags:
+    - vnc
+  
+- name: Copy password script
+  template: src=create_password.j2 dest=/tmp/pass.sh mode=0744
+  tags:
+    - vnc
+
+- name: Run password script
+  shell: . /tmp/pass.sh
+
+- name: Copy xstartup script
+  template: src=xstartup.j2 dest="/home/{{ user }}/.vnc/xstartup" mode=0744
+  tags:
+    - vnc
+
+- name: vncserver | template /etc/systemd/system/vncserver.service
+  template: src=systemd.conf.j2 dest=/etc/systemd/system/vncserver.service owner=root group=root mode=0755
+  become: yes
+  notify: restart vncserver
+  tags:
+    - vnc

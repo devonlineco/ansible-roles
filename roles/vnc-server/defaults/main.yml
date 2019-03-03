@@ -1,0 +1,4 @@
+---
+vnc_user: "{{ user }}"
+vnc_display_no: 1
+vnc_password: "{{ password }}"

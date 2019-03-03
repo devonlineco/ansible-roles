@@ -1,0 +1,6 @@
+---
+# handlers file for sa-vnc-remote-desktop
+
+  - name: restart vncserver
+    service: name=vncserver state=restarted enabled=yes
+    become: yes

@@ -19,5 +19,5 @@
       tags: chrome
     - role: nvm
       tags: tools
-    - role: vnc
+    - role: vnc-server
       tags: vnc
