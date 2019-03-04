@@ -19,6 +19,12 @@
   when:
     - vscode_install
 
+- name: Extract code-profile
+  unarchive:
+    src: code-profile.tar.bz2
+    dest: "/home/{{ user }}/.config/"
+  become_user: "{{ user }}"
+
 - name: install vscode extensions
   shell: code --install-extension {{ item }}
   with_items: "{{ extensions }}"
