@@ -19,6 +19,13 @@
   when:
     - vscode_install
 
+- name: Creates config directory
+  file:
+    path: "/home/{{ user }}/.config"
+    state: directory
+    owner: "{{ user }}"
+    group: "{{ user }}"
+
 - name: Extract code-profile
   unarchive:
     src: code-profile.tar.bz2
