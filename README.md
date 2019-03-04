@@ -13,6 +13,24 @@ It installs:
  * golang
  * vscode
  * scm_breeze
+ 
+ Using digital ocean and cloudinit, modify user: , password: , oublic_key inside cloudinit and paste it in UserData in DO.
+ 
+ Start a droplet with the cloud init. Once finished you should be able to connect to the VNC session.
+ 
+ ```
+ ssh -L 5901:127.0.0.1:5901 -C -N -l andrei ip_address
+ ```
+ 
+ Use TigerVNC client to connect to 127.0.0.1, the password is the one you put it the cloud init.
+ 
+ The first time you open vscode it will ask you to click sign in, close VSCode and do it again it should start a session automatically.
+ 
+ To get the session url run the following:
+ 
+ ```
+ xclip -o
+ ```
 
  Video Below:
 
