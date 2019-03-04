@@ -17,6 +17,8 @@
 - name: Source nvm in ~/.zshrc
   lineinfile:
     dest: ~/.zshrc
+    dest: "/home/{{ user }}/.zshrc"
     line: . {{ nvm_install_path }}/nvm.sh
     create: yes
+  become_user: "{{ user }}"
   tags: nvm

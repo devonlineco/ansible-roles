@@ -33,9 +33,10 @@
 
 - name: export display in ~/.zshrc
   lineinfile:
-    dest: ~/.zshrc
+    dest: "/home/{{ user }}/.zshrc"
     line: "export DISPLAY=:{{ vnc_display_no }}"
     create: yes
+  become_user: "{{ user }}"
   tags: vnc
 
 - name: vncserver | template /etc/systemd/system/vncserver.service
