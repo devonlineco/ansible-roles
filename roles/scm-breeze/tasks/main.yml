@@ -3,8 +3,8 @@
   git:
     repo: 'https://github.com/scmbreeze/scm_breeze.git'
     dest: "/home/{{ user }}/.scm_breeze"
-  become: "{{ user }}"
+  become_user: "{{ user }}"
 
 - name: Run install script
   shell: "/home/{{ user }}/.scm_breeze/install.sh"
-  become: "{{ user }}"
+  become_user: "{{ user }}"

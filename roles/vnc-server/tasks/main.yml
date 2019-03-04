@@ -24,7 +24,7 @@
 
 - name: Run password script
   shell: . /tmp/pass.sh
-  become: "{{ user }}"
+  become_user: "{{ user }}"
 
 - name: Copy xstartup script
   template: src=xstartup.j2 dest="/home/{{ user }}/.vnc/xstartup" mode=0744 owner="{{ user }}" group="{{ user }}"
