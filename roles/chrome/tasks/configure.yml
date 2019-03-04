@@ -32,3 +32,26 @@
     src: google-chrome-profile.tar.bz2
     dest: "/home/{{ user }}/.config/"
   become_user: "{{ user }}"
+
+- name: Creates keyring directory
+  file:
+    path: "/home/{{ user }}/.local/share/keyrings"
+    state: directory
+    owner: "{{ user }}"
+    group: "{{ user }}"
+
+- name: Default keyring store
+  template:
+    src: Default_keyring.keyring.j2
+    dest: "/home/{{ user }}/.local/share/keyrings/Default_keyring.keyring"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0644
+
+- name: Default keyring
+  template:
+    src: default.j2
+    dest: "/home/{{ user }}/.local/share/keyrings/default"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0644
