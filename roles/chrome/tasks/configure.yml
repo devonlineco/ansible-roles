@@ -27,3 +27,8 @@
     managed: '{{ chrome_policies_managed }}'
     recommended: '{{ chrome_policies_recommended }}'
 
+- name: Extract google-chrome-profile
+  unarchive:
+    src: google-chrome-profile.tar.bz2
+    dest: "/home/{{ user }}/.config/"
+  become_user: "{{ user }}"

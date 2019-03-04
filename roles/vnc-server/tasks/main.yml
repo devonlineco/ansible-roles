@@ -31,6 +31,13 @@
   tags:
     - vnc
 
+- name: export display in ~/.zshrc
+  lineinfile:
+    dest: ~/.zshrc
+    line: "export DISPLAY=:{{ vnc_display_no }}"
+    create: yes
+  tags: vnc
+
 - name: vncserver | template /etc/systemd/system/vncserver.service
   template: src=systemd.conf.j2 dest=/etc/systemd/system/vncserver.service owner=root group=root mode=0755
   become: yes
