@@ -19,6 +19,10 @@
       tags: chrome
     - role: nvm
       tags: tools
+    - role: elixir
+      tags: langs
+    - role: golang
+      tags: langs
     - role: scm-breeze
       tags: tools
     - role: vnc-server
