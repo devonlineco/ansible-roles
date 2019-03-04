@@ -12,6 +12,7 @@
     repo: https://github.com/creationix/nvm.git
     dest: "{{ nvm_install_path }}"
     version: "{% if nvm_version!='HEAD' %}v{% endif %}{{ nvm_version }}"
+  become_user: "{{ user }}"
   tags: nvm
 
 - name: Source nvm in ~/.zshrc

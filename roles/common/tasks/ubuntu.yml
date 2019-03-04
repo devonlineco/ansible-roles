@@ -55,6 +55,7 @@
       - git
       - expect
       - xclip
+      - tig
       # VSCOODE live share reqs
       - libssl1.0.0 
       - libkrb5-3
