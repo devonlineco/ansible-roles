@@ -2,17 +2,20 @@
 
 write_files:
   - path: /root/install.sh
+    permissions: '0755'
     content: |
       #!/bin/bash
+
+      export HOME=/root
 
       sudo apt-get update -y && sudo apt-get install \
           ansible -y
 
-      git clone https://github.com/devbox-hero/ansible-roles.git
+      git clone https://github.com/devbox-hero/ansible-roles.git /root/ansible-roles
 
-      cd ansible-roles/
+      cd /root/ansible-roles/
 
-      cat > config.cfg << EOL
+      cat > /root/ansible-roles/config.cfg << EOL
       ---
       user: andrei
       password: password
@@ -28,7 +31,7 @@ write_files:
         time: 06:00
       EOL
 
-      ansible-playbook main.yml
+      cd /root/ansible-roles && ansible-playbook main.yml
 
 runcmd:
-  - chmod +x /root/install.sh && cd /root/ && ./install.sh
+  - /bin/bash -c '/root/install.sh' 
