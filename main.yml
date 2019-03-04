@@ -9,17 +9,17 @@
   roles:
     - role: common
       tags: common
-    # - role: zsh
-    #   tags: zsh
-    # - role: docker
-    #   tags: docker
-    # - role: vscode
-    #   tags: vscode
+    - role: zsh
+      tags: zsh
+    - role: docker
+      tags: docker
+    - role: vscode
+      tags: vscode
     - role: chrome
       tags: chrome
-    # - role: nvm
-    #   tags: tools
-    # - role: scm-breeze
-    #   tags: tools
-    # - role: vnc-server
-    #   tags: vnc
+    - role: nvm
+      tags: tools
+    - role: scm-breeze
+      tags: tools
+    - role: vnc-server
+      tags: vnc
