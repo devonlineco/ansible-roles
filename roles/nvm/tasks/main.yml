@@ -14,9 +14,9 @@
     version: "{% if nvm_version!='HEAD' %}v{% endif %}{{ nvm_version }}"
   tags: nvm
 
-- name: Source nvm in ~/.zshrc
+- name: Source nvm in ~/.zshrc.local
   lineinfile:
-    dest: ~/.zshrc
+    dest: ~/.zshrc.local
     line: . {{ nvm_install_path }}/nvm.sh
     create: yes
   tags: nvm

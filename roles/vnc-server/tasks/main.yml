@@ -9,7 +9,7 @@
     - vnc
   
 - name: Copy password script
-  template: src=create_password.j2 dest=/tmp/pass.sh mode=0744
+  template: src=create_password.j2 dest=/tmp/pass.sh mode=0744 owner="{{ user }}" group="{{ user }}"
   tags:
     - vnc
 
@@ -24,6 +24,7 @@
 
 - name: Run password script
   shell: . /tmp/pass.sh
+  become: "{{ user }}"
 
 - name: Copy xstartup script
   template: src=xstartup.j2 dest="/home/{{ user }}/.vnc/xstartup" mode=0744 owner="{{ user }}" group="{{ user }}"

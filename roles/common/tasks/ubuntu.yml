@@ -55,6 +55,15 @@
       - git
       - expect
       - xclip
+      # VSCOODE live share reqs
+      - libssl1.0.0 
+      - libkrb5-3
+      - zlib1g
+      - libicu60
+      - gnome-keyring
+      - libsecret-1-0
+      - desktop-file-utils
+      - x11-utils
     sysctl:
       - item: fs.inotify.max_user_watches
         value: 524288

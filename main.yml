@@ -19,5 +19,7 @@
       tags: chrome
     - role: nvm
       tags: tools
+    - role: scm-breeze
+      tags: tools
     - role: vnc-server
       tags: vnc
