@@ -4,16 +4,13 @@ After=syslog.target network.target
 
 [Service]
 Type=forking
-{% if vnc_display_no is defined %}
-Environment=DISPLAY=:{{ vnc_display_no }}
-{% endif %}
 User={{ user }}
 Group={{ user }}
-WorkingDirectory=/home/{{ usr }}
+WorkingDirectory=/home/{{ user }}
 
 PIDFile=/home/{{ user }}/.vnc/%H:{{ vnc_display_no }}.pid
 ExecStartPre=-/usr/bin/vncserver -kill :{{ vnc_display_no }} > /dev/null 2>&1
-ExecStart=/usr/bin/vncserver -depth 24 -geometry 1280x800 :%i
+ExecStart=/usr/bin/vncserver -depth 24 -geometry 1280x800 :{{ vnc_display_no }}
 ExecStop=/usr/bin/vncserver -kill :{{ vnc_display_no }}
 
 [Install]
