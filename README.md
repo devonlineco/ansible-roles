@@ -14,7 +14,7 @@ It installs:
  * vscode
  * scm_breeze
  
- Using digital ocean and cloudinit, modify user: , password: , oublic_key inside cloudinit and paste it in UserData in DO.
+ Using digital ocean and cloudinit, modify user: , password: , public_key inside cloudinit and paste it in UserData in DO.
  
  Start a droplet with the cloud init. Once finished you should be able to connect to the VNC session.
  
@@ -25,6 +25,12 @@ It installs:
  Use TigerVNC client to connect to 127.0.0.1, the password is the one you put it the cloud init.
  
  The first time you open vscode it will ask you to click sign in, close VSCode and do it again it should start a session automatically.
+ 
+ Use mosh to save your life.
+ 
+ ```brew install mosh```
+ 
+ ```mosh user@ip_address```
  
  To get the session url run the following:
  
