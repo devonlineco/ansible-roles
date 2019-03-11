@@ -1,8 +1,6 @@
-# VSCode DevBox
+# VSCode DevBox (using both vscode install and browser ide)
 
-Feedback is appreciated: I was thinking of developing a little tool that sits on the server + a cli that you can manage the server itself like starting it shutting it down, creating workspaces, opening workspaces, closing sessions, forwarding ports etc.
-
-Note: This is very much work in progress but the goal of this is to be able to easily spin up a VSCode instance and connect to it so you can dev remotely.
+Note: This is very much work in progress but the goal of this is to be able to easily spin up a VSCode instance and connect to it so you can dev remotely. Either using VSCode live share or code server
 
 Inside cloudinit there are some roles that run.
 
@@ -10,6 +8,8 @@ It installs:
  * zsh
  * chrome
  * vnc
+ * code-server
+ * letsencrypt + nginx
  * docker
  * elixir
  * golang

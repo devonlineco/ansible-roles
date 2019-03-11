@@ -9,7 +9,7 @@ Group={{ user }}
 WorkingDirectory=/home/{{ user }}
 
 PIDFile=/home/{{ user }}/.code-server/code-server.pid
-ExecStart={{ code_server_bin }} --allow-http --password={{ code_server_password }} --port {{ code_server_port }} --data-dir {{ code_projects_dir }}
+ExecStart={{ code_server_bin }} --allow-http --password={{ code_server_password }} --port={{ code_server_port }} --data-dir={{ code_server_settings_folder }} {{ code_projects_dir }}
 ExecStop=/bin/kill -- $MAINPID
 
 [Install]
