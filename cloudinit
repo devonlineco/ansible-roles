@@ -26,6 +26,7 @@ write_files:
       users:
         - "{{ user }}"
 
+      symlink_vscode: True
       provider: local
 
       unattended_reboot:
@@ -33,7 +34,7 @@ write_files:
         time: 06:00
       EOL
 
-      cd /root/ansible-roles && ansible-playbook main.yml
+      cd /root/ansible-roles && ansible-playbook main.vnc.yml
 
 runcmd:
   - /bin/bash -c '/root/install.sh' 

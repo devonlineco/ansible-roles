@@ -66,6 +66,8 @@
 - name: write code settings
   template:
     src: settings.json.j2
+    owner: "{{ user }}"
+    group: "{{ user }}"
     dest: "{{ code_server_settings_folder }}/User/settings.json"
   tags:
     - code-server

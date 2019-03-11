@@ -3,10 +3,7 @@ vscode_install: true
 
 extensions:
   - gabrielgrinberg.auto-run-command
-  - karigari.chat
   - ms-vsliveshare.vsliveshare
-  - ms-vsliveshare.vsliveshare-audio
-  - ms-vsliveshare.vsliveshare-pack
   - vscodevim.vim
   - ms-vscode.go
   - dracula-theme.theme-dracula
