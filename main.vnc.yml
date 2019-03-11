@@ -13,10 +13,14 @@
       tags: zsh
     - role: docker
       tags: docker
+    - role: vscode
+      tags: vscode
     - role: code-server
       tags: code-server
     - role: nginx
       tags: code-server
+    - role: chrome
+      tags: chrome
     - role: nvm
       tags: tools
     - role: elixir
@@ -25,3 +29,5 @@
       tags: langs
     - role: scm-breeze
       tags: tools
+    - role: vnc-server
+      tags: vnc

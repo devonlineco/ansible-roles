@@ -1,13 +1,26 @@
 ---
-- name: tigervnc-standalone-server | install
-  apt: pkg="tigervnc-standalone-server" state="present"
-  retries: 3
-  register: result
-  until: not result.failed
-  become: yes
-  tags:
-    - vnc
-  
+- set_fact:
+    vnctools:  
+      - expect
+      - xclip
+      - xfce4
+      - xfce4-goodies
+      # VSCOODE live share reqs
+      - libssl1.0.0 
+      - libkrb5-3
+      - zlib1g
+      - libicu60
+      - gnome-keyring
+      - libsecret-1-0
+      - desktop-file-utils
+      - x11-utils
+      - tigervnc-standalone-server
+
+- name: Install vnctools
+  package: name="{{ item }}" state=present
+  with_items:
+    - "{{ vnctools|default([]) }}"
+
 - name: Copy password script
   template: src=create_password.j2 dest=/tmp/pass.sh mode=0744 owner="{{ user }}" group="{{ user }}"
   tags:
