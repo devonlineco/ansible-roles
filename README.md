@@ -4,6 +4,20 @@ Note: This is very much work in progress but the goal of this is to be able to e
 
 Inside cloudinit there are some roles that run.
 
+Fork it and customise it.
+
+There are 2 playbooks: 
+
+main.vnc.yml - which install vnc and vscode and it shares the extensions so you can download them from microsoft
+
+Installing new extensions like this:
+
+```
+code --install-extension eamodio.gitlens
+```
+
+main.yml - it just installs code-server, you will need to rely on coder.com extension library which is built from open source extensions.
+
 It installs:
  * zsh
  * chrome
