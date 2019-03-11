@@ -15,8 +15,6 @@
       tags: docker
     - role: vscode
       tags: vscode
-    - role: certbot
-      tags: code-server
     - role: code-server
       tags: code-server
     - role: nginx

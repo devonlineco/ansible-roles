@@ -5,6 +5,9 @@
 - name: Install nginx
   package: name=nginx state=latest
 
+- name: install certbot letsencrypt
+  apt: name=certbot state=latest
+
 - name: Remove default nginx config
   file: name=/etc/nginx/sites-enabled/default state=absent
 
@@ -18,10 +21,26 @@
     src: nginx-http.j2
     dest: /etc/nginx/sites-enabled/http
 
+- name: Create letsencrypt certificate
+  shell: certbot certonly -n --webroot -w /var/www/letsencrypt -m {{ letsencrypt_email }} --agree-tos -d {{ domain_name }}
+  args:
+    creates: /etc/letsencrypt/live/{{ domain_name }}
+
+- name: Generate dhparams
+  shell: openssl dhparam -out /etc/nginx/dhparams.pem 2048
+  args:
+    creates: /etc/nginx/dhparams.pem
+
 - name: Install nginx site for specified site
   template:
     src: nginx-le.j2
     dest: /etc/nginx/sites-enabled/le
 
-- name: Reload nginx to activate letsencrypt site
+- name: Reload nginx to activate specified site
   service: name=nginx state=restarted
+
+- name: Add letsencrypt cronjob for cert renewal
+  cron:
+    name: letsencrypt_renewal
+    special_time: weekly
+    job: certbot --renew certonly -n --webroot -w /var/www/letsencrypt -m {{ letsencrypt_email }} --agree-tos -d {{ domain_name }} && service nginx reload
