@@ -10,3 +10,7 @@ code_server_lib_bin: "{{ code_server_lib_path }}/{{ code_server_version }}/code-
 code_server_port: 8080
 code_server_password: "{{ password }}"
 code_server_bin: /usr/local/bin/code-server
+
+code_server_settings_folder: "/home/{{ user }}/.local/share/code-server"
+
+vscode_extensions_folder: "/home/{{ user }}/.vscode/extensions"
