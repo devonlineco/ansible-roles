@@ -21,6 +21,18 @@
     src: nginx-http.j2
     dest: /etc/nginx/sites-enabled/http
 
+- name: Creates letsencrypt dir directory
+  file:
+    path: /var/www/letsencrypt
+    owner: root
+    user: root
+    state: directory
+  tags:
+    - nginx
+
+- name: Reload nginx to activate letsencrypt site
+  service: name=nginx state=restarted
+
 - name: Create letsencrypt certificate
   shell: certbot certonly -n --webroot -w /var/www/letsencrypt -m {{ letsencrypt_email }} --agree-tos -d {{ domain_name }}
   args:
