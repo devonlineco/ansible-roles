@@ -65,6 +65,9 @@
       - libsecret-1-0
       - desktop-file-utils
       - x11-utils
+      - neovim
+      - python-neovim
+      - python3-neovim
     sysctl:
       - item: fs.inotify.max_user_watches
         value: 524288

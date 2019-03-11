@@ -1,0 +1,16 @@
+[Unit]
+Description=Start Code-server server at startup
+After=syslog.target network.target
+
+[Service]
+Type=forking
+User={{ user }}
+Group={{ user }}
+WorkingDirectory=/home/{{ user }}
+
+PIDFile=/home/{{ user }}/.code-server/code-server.pid
+ExecStart={{ code_server_bin }} --allow-http --password={{ code_server_password }} --port {{ code_server_port }}
+ExecStop=/bin/kill -- $MAINPID
+
+[Install]
+WantedBy=multi-user.target

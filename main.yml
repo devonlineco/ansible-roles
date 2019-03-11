@@ -15,6 +15,10 @@
       tags: docker
     - role: vscode
       tags: vscode
+    - role: code-server
+      tags: code-server
+    - role: nginx
+      tags: code-server
     - role: chrome
       tags: chrome
     - role: nvm
