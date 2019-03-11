@@ -1,13 +1,34 @@
 ---
   
-- name: install code-server
+- name: install code-server to lib dir
   unarchive:
-    src: "{{ code_download_url }}"
-    dest: /usr/local/bin
+    src: "{{ code_server_download_url }}"
+    dest: "{{ code_server_lib_path }}"
     remote_src: yes
+    owner: "{{ user }}"
+    group: "{{ user }}"
   tags:
     - code-server
   
+- name: Changing perm of "code-server", adding "+x"
+  file:
+    dest: "{{ code_server_lib_bin }}"
+    mode: a+x
+    owner: "{{ user }}"
+    group: "{{ user }}"
+  tags:
+    - code-server
+
+- name: Create symbolic link 
+  file:
+    src: "{{ code_server_lib_bin }}"
+    dest: "{{ code_server_bin }}"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    state: link
+  tags:
+    - code-server
+
 - name: Creates code-server directory
   file:
     path: "/home/{{ user }}/.code-server"

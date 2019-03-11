@@ -1,5 +1,10 @@
 ---
-code_download_url: https://github.com/devbox-hero/code-server/releases/download/1.32.0-4/code-server-1.32.0-4-linux-x64.tar.gz
+
+code_server_tag: 1.32.0-4
+code_server_version: "code-server-{{ code_server_tag }}-linux-x64"
+code_server_download_url: "https://github.com/devbox-hero/code-server/releases/download/{{ code_server_tag }}/{{ code_server_version }}.tar.gz"
+code_server_lib_path: /usr/local/lib
+code_server_lib_bin: "{{ code_server_lib_path }}/{{ code_server_version }}/code-server"
 code_server_port: 8080
 code_server_password: "{{ password }}"
 code_server_bin: /usr/local/bin/code-server
