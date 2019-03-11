@@ -13,6 +13,8 @@
       tags: zsh
     - role: docker
       tags: docker
+    - role: vnc-server
+      tags: vnc
     - role: vscode
       tags: vscode
     - role: code-server
@@ -29,5 +31,3 @@
       tags: langs
     - role: scm-breeze
       tags: tools
-    - role: vnc-server
-      tags: vnc
