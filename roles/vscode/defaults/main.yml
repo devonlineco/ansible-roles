@@ -7,3 +7,7 @@ extensions:
   - ms-vsliveshare.vsliveshare
   - ms-vsliveshare.vsliveshare-audio
   - ms-vsliveshare.vsliveshare-pack
+  - vscodevim.vim
+  - ms-vscode.go
+  - dracula-theme.theme-dracula
+  - jakebecker.elixir-ls

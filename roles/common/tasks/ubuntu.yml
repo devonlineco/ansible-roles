@@ -68,6 +68,7 @@
       - neovim
       - python-neovim
       - python3-neovim
+      - fonts-inconsolata
     sysctl:
       - item: fs.inotify.max_user_watches
         value: 524288
