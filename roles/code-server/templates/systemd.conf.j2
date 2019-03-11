@@ -3,7 +3,7 @@ Description=Start Code-server server at startup
 After=syslog.target network.target
 
 [Service]
-Type=forking
+Type=simple
 User={{ user }}
 Group={{ user }}
 WorkingDirectory=/home/{{ user }}

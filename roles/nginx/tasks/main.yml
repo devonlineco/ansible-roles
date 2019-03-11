@@ -18,5 +18,10 @@
     src: nginx-http.j2
     dest: /etc/nginx/sites-enabled/http
 
+- name: Install nginx site for specified site
+  template:
+    src: nginx-le.j2
+    dest: /etc/nginx/sites-enabled/le
+
 - name: Reload nginx to activate letsencrypt site
   service: name=nginx state=restarted
