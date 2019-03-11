@@ -1,0 +1,6 @@
+---
+# handlers file for sa-vnc-remote-desktop
+
+  - name: restart code-server
+    service: name=code-server state=restarted enabled=yes
+    become: yes
