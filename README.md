@@ -54,6 +54,4 @@ It installs:
  xclip -o
  ```
 
- Video Below:
 
- [![VSCode DevBox](http://img.youtube.com/vi/KNIn8l2u9S8/0.jpg)](https://www.youtube.com/watch?v=KNIn8l2u9S8 "VSCode DevBox")
