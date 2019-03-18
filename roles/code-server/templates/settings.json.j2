@@ -16,6 +16,17 @@
 	},
 	"workbench.colorTheme": "Dracula",
 
+	// go get -u golang.org/x/tools/cmd/gopls
+
+	"go.alternateTools": {
+    "go-langserver": "gopls", // or bingo
+  },
+  "go.languageServerExperimentalFeatures": {
+    "format": true,
+    "autoComplete": true
+  },
+  "go.useLanguageServer": true,
+
 	// Vim settings
 
 	"vim.enableNeovim": true,
