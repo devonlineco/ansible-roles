@@ -21,9 +21,9 @@ extensions:
   - foxundermoon.shell-format
   - mauve.terraform
   - mjmcloug.vscode-elixir
-  - eg2.tslint
   - sammkj.vscode-elixir-formatter
   - redhat.vscode-yaml
   - ms-kubernetes-tools.vscode-kubernetes-tools
   - shan.code-settings-sync
   - peterjausovec.vscode-docker
+  - ms-vscode.vscode-typescript-tslint-plugin
