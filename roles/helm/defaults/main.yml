@@ -1,0 +1,12 @@
+---
+# Helm version number
+helm_version: '2.13.1'
+
+# Mirror to download the Helm from
+helm_mirror: 'https://storage.googleapis.com/kubernetes-helm'
+
+# Dir where Helm should be installed
+helm_install_dir: '/usr/local/share/helm'
+
+# Directory to store files downloaded for Helm
+helm_download_dir: "{{ x_ansible_download_dir | default(ansible_env.HOME + '/.ansible/tmp/downloads') }}"

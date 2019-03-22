@@ -1,5 +1,25 @@
 ---
 
+- set_fact:
+    vstools:
+      - xclip
+      - xfce4
+      - xfce4-goodies
+      # VSCOODE live share reqs
+      - libssl1.0.0
+      - libkrb5-3
+      - zlib1g
+      - libicu60
+      - gnome-keyring
+      - libsecret-1-0
+      - desktop-file-utils
+      - x11-utils
+
+- name: Install vscodetools
+  package: name="{{ item }}" state=present
+  with_items:
+    - "{{ vnctools|default([]) }}"
+
 - name: set gpg key
   apt_key:
     url: "https://packages.microsoft.com/keys/microsoft.asc"

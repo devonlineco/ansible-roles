@@ -44,6 +44,16 @@
       group: "{{ user }}"
       mode: 0644
 
+  - name: Configs
+    template:
+      src: editorconfig.j2
+      dest: "/home/{{ user }}/.editorconfig
+      owner: "{{ user }}"
+      group: "{{ user }}"
+      mode: 0644
+
+  - meta: flush_handlers
+
   - meta: flush_handlers
   rescue:
     - debug: var=fail_hint

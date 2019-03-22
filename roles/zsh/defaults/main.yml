@@ -40,6 +40,9 @@ zsh_antigen_bundles:
   - { name: rake, command: rake }
   - { name: symfony2, command: symfony }
   - { name: systemd, command: systemctl }
+  - { name: helm, command: helm }
+  - { name: minikube, command: minikube }
+  - { name: minikube, command: minikube }
   - python
   - { name: tmux, command: tmux }
   - { name: vagrant, command: vagrant }

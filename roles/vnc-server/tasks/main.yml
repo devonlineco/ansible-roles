@@ -1,19 +1,7 @@
 ---
 - set_fact:
-    vnctools:  
+    vnctools:
       - expect
-      - xclip
-      - xfce4
-      - xfce4-goodies
-      # VSCOODE live share reqs
-      - libssl1.0.0 
-      - libkrb5-3
-      - zlib1g
-      - libicu60
-      - gnome-keyring
-      - libsecret-1-0
-      - desktop-file-utils
-      - x11-utils
       - tigervnc-standalone-server
 
 - name: Install vnctools

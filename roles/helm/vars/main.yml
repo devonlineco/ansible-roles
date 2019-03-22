@@ -1,0 +1,9 @@
+---
+# The OS of the Helm redistributable
+helm_os: 'linux'
+
+# The CPU architecture of the Helm redistributable
+helm_architecture: 'amd64'
+
+# File name of the Helm redistributable file
+helm_redis_filename: 'helm-v{{ helm_version }}-{{ helm_os }}-{{ helm_architecture }}.tar.gz'

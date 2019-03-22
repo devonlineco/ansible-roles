@@ -1,0 +1,33 @@
+---
+galaxy_info:
+  author: John Freeman
+  role_name: helm
+  description: Ansible role for downloading and installing Helm the package manager for Kubernetes.
+  company: GantSign Ltd.
+  license: MIT
+  min_ansible_version: 2.5
+  platforms:
+    - name: EL
+      versions:
+        - 7
+    - name: Fedora
+      versions:
+        - 28
+    - name: Ubuntu
+      versions:
+        - trusty
+        - xenial
+        - bionic
+    - name: Debian
+      versions:
+        - jessie
+        - stretch
+    - name: opensuse
+      versions:
+        - 15.0
+  galaxy_tags:
+    - helm
+    - kubernetes
+    - k8s
+    - development
+dependencies: []

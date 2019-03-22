@@ -1,0 +1,21 @@
+---
+# Dir where Minikube should be installed
+minikube_install_dir: '/usr/local/bin'
+
+# Path where Minikube should be installed
+minikube_install_path: '{{ minikube_install_dir }}/minikube'
+
+# Mirror to download the Minikube from
+minikube_mirror: 'https://github.com/kubernetes/minikube/releases/download/v{{ minikube_version }}'
+
+# The OS of the Minikube redistributable
+minikube_os: 'linux'
+
+# The CPU architecture of the Minikube redistributable
+minikube_architecture: 'amd64'
+
+# File name of the Minikube redistributable file
+minikube_redis_filename: 'minikube-{{ minikube_os }}-{{ minikube_architecture }}'
+
+# File name of the Minikube download file
+minikube_download_filename: '{{ minikube_redis_filename }}-{{ minikube_version }}'

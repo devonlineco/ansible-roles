@@ -1,0 +1,92 @@
+---
+- name: create download directory
+  file:
+    state: directory
+    mode: 'u=rwx,go=rx'
+    dest: '{{ helm_download_dir }}'
+
+- name: download sha256sum
+  get_url:
+    url: '{{ helm_mirror }}/{{ helm_redis_filename }}.sha256'
+    dest: '{{ helm_download_dir }}/{{ helm_redis_filename }}.sha256'
+    force: no
+    use_proxy: yes
+    validate_certs: yes
+    mode: 'u=rw,go=r'
+
+- name: read sha256sum
+  slurp:
+    src: '{{ helm_download_dir }}/{{ helm_redis_filename }}.sha256'
+  register: helm_sha256sum
+
+- name: download Helm
+  get_url:
+    url: '{{ helm_mirror }}/{{ helm_redis_filename }}'
+    dest: '{{ helm_download_dir }}/{{ helm_redis_filename }}'
+    sha256sum: '{{ helm_sha256sum.content | b64decode | trim }}'
+    force: no
+    use_proxy: yes
+    validate_certs: yes
+    mode: 'u=rw,go=r'
+
+- name: check current version
+  command: >
+    {{ helm_install_dir }}/helm version --client --template {{ "'{{ .Client.SemVer }}'" }}
+  register: helm_current_version
+  failed_when: no
+  changed_when: no
+
+- name: current version
+  debug:
+    msg: '{{ helm_current_version.stdout }}'
+  when: helm_current_version.rc == 0
+
+- name: remove existing installation
+  become: yes
+  file:
+    path: '{{ helm_install_dir }}'
+    state: absent
+  when:
+    - helm_current_version.rc == 0
+    - helm_current_version.stdout != ('v' + helm_version)
+
+- name: create the Helm installation dir
+  become: yes
+  file:
+    state: directory
+    owner: root
+    group: root
+    mode: 'u=rwx,go=rx'
+    dest: '{{ helm_install_dir }}'
+
+- name: install unarchive module dependencies (apt, yum, dnf, zypper)
+  become: yes
+  package:
+    name: '{{ item }}'
+    state: present
+  with_items:
+    - tar
+    - unzip
+    - gzip
+  when: ansible_pkg_mgr in ('apt', 'yum', 'dnf', 'zypper')
+
+- name: install Helm
+  become: yes
+  unarchive:
+    src: '{{ helm_download_dir }}/{{ helm_redis_filename }}'
+    remote_src: yes
+    dest: '{{ helm_install_dir }}'
+    extra_opts:
+      - '--strip-components=1'
+    owner: root
+    group: root
+    creates: '{{ helm_install_dir }}/helm'
+
+- name: create helm link
+  become: yes
+  file:
+    src: '{{ helm_install_dir }}/helm'
+    dest: '/usr/local/bin/helm'
+    state: link
+    owner: root
+    group: root
