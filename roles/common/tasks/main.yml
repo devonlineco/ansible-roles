@@ -47,7 +47,7 @@
   - name: Configs
     template:
       src: editorconfig.j2
-      dest: "/home/{{ user }}/.editorconfig
+      dest: "/home/{{ user }}/.editorconfig"
       owner: "{{ user }}"
       group: "{{ user }}"
       mode: 0644
