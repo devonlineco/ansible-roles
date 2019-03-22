@@ -56,6 +56,8 @@
       - python-neovim
       - python3-neovim
       - fonts-inconsolata
+      - virtualbox
+      - virtualbox-ext-pack
     sysctl:
       - item: fs.inotify.max_user_watches
         value: 524288

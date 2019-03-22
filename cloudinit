@@ -34,7 +34,7 @@ write_files:
         time: 06:00
       EOL
 
-      cd /root/ansible-roles && ansible-playbook main.vnc.yml
+      cd /root/ansible-roles && ansible-playbook main.yml
 
 runcmd:
   - /bin/bash -c '/root/install.sh'
