@@ -13,7 +13,6 @@ extensions:
   - iampeterbanjo.elixirlinter
   - eamodio.gitlens
   - kumar-harsh.graphql-for-vscode
-  - xabikos.javascriptsnippets
   - mohsen1.react-javascript-to-typescript-transform-vscode
   - wholroyd.jinja
   - silvenon.mdx
