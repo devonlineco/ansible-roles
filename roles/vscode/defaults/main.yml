@@ -27,3 +27,4 @@ extensions:
   - shan.code-settings-sync
   - peterjausovec.vscode-docker
   - ms-vscode.vscode-typescript-tslint-plugin
+  - redhat.vscode-yaml

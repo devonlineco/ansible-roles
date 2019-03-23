@@ -1,5 +1,5 @@
 ---
-  
+
 - name: install code-server to lib dir
   unarchive:
     src: "{{ code_server_download_url }}"
@@ -23,18 +23,6 @@
   tags:
     - code-server
 
-- name: symlink to vscode extensions
-  file:
-    src: "{{ vscode_extensions_folder }}"
-    dest: "{{ code_server_settings_folder }}/extensions"
-    owner: "{{ user }}"
-    group: "{{ user }}"
-    force: yes
-    state: link
-  when: symlink_vscode == True
-  tags:
-    - code-server
-  
 - name: Changing perm of "code-server", adding "+x"
   file:
     dest: "{{ code_server_lib_bin }}"
@@ -44,7 +32,7 @@
   tags:
     - code-server
 
-- name: Create symbolic link 
+- name: Create symbolic link
   file:
     src: "{{ code_server_lib_bin }}"
     dest: "{{ code_server_bin }}"
@@ -54,12 +42,32 @@
   tags:
     - code-server
 
+- name: Restart vs code
+  service:
+    name: code-server
+    state: restarted
+  ignore_errors: yes
+  tags:
+    - code-server
+
 - name: Creates code-server directory
   file:
     path: "/home/{{ user }}/.code-server"
     state: directory
     owner: "{{ user }}"
     group: "{{ user }}"
+  tags:
+    - code-server
+
+- name: symlink to vscode extensions
+  file:
+    src: "{{ vscode_extensions_folder }}"
+    dest: "{{ code_server_settings_folder }}/extensions"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    force: yes
+    state: link
+  when: symlink_vscode == True
   tags:
     - code-server
 
