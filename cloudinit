@@ -11,7 +11,7 @@ write_files:
       sudo apt-get update -y && sudo apt-get install \
           ansible -y
 
-      git clone https://github.com/devbox-hero/ansible-roles.git /root/ansible-roles
+      git clone https://github.com/devonlineco/ansible-roles.git /root/ansible-roles
 
       cd /root/ansible-roles/
 
