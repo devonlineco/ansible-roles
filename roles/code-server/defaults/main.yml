@@ -2,7 +2,7 @@
 
 code_projects_dir: "/home/{{ user }}/projects"
 
-code_server_tag: 1.24-vsc1.32.0
+code_server_tag: 1.26-vsc1.32.0
 code_server_version: "code-server{{ code_server_tag }}-linux-x64"
 code_server_download_url: "https://github.com/devonlineco/code-server/releases/download/{{ code_server_tag }}/{{ code_server_version }}.tar.gz"
 code_server_lib_path: /usr/local/lib
