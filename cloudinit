@@ -17,11 +17,38 @@ write_files:
 
       cat > /root/ansible-roles/config.cfg << EOL
       ---
-      user: andrei
-      domain_name: andrei.devboxhero.com
+      user: tom
+      domain_name: tom.devboxhero.com
       letsencrypt_email: lusu777@gmail.com
       password: password
-      authorized_key : ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDc6xX5kZ9bZKsf2RmeBgwomiareOpEDLx6zwGCGcHQ34UFNi8czg3ZGoziTjO4ZRA4j1cGhyd7S57renRw6xKI8GV1STlVvQmDUhLr11FJLvn8qd5tNnbNV6SemZ+na0Bq7Klz46HmK9LJ6E9Vq3n/vaP8f7SxroQF/SIzSV9Kvtqy4U3zOrvzffb2HHyNxiK87b1vqewUCsAVhADAdSHuOCY04+9H0AVgLEK+2fWvbuLCrAsggpTjSaVnSZpqJWQWZkASiCNs7sUzSeBWbyR0vaMH5010/nfv8cHRgE96Es+bwW/eCdC5qbRx2pubFPkWFHBMNE/eI+2jAUhpMuoHJ41eww78Oq0TeF6AGAYB9vk5LxUILzYQqv+53tCDLHXo7/PRpX16Q293gytQTITIk0Qw9PDmoHDyaWAP+Lxtph1U6OtGl1fr+aHx/AN1H53lU0KXqpfk0hjd/y67sST7/bDUVQS0Ipzxc4+4ProXe0OfDH/6vaqPW1T6ELcRSZs8q62u1Wp/s+qHXfPfDvjc/edI07GoHHpEZZ225jydnKGZ+Ru3eh7dBBjUWQcqaftp73D2xpnaiA27JhuAqETGMArDx4b/TQ9nCUdiicBSe3YisoYi1BUJerNcAKbfaOwCxSr1lR/aDnRvC8vM3hkl2c4uirmjp3JE0/geuUwBrw== andrei@housemeerkat.com
+      authorized_key : ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDvMHkT+zEROPSA9SKmD90CdmfbLmpDqTEvmz1b8iiRjy+AbDNjzPII4Tsihgw/GmGxerDiIKdiuwV/R7Ze0M4V89JujgiyvgzIDr/1EAer0pzqobu8MLKgCpN0Svu8bMMoBORHOdvzwRRQLfwUf5R+81ko23+izSXeAbdQyPAE68w8PFqeGmLLWnEzq1Znf3sTwMDBKJbCzRcu/OTShnxqcnt3y72HwB3Vp8tzhQb6n76W+gFrmqRYn4C3TPml4FaQXOl+/Q7DMhBZ46OxYgLCmVLelFwF+kfkCSch5qPaaI0NVIGjCgVsoOr+UiJFK0xwapPj5jb+ptJQXdN+SHmXiOtRfuuDUcp+4Jl+3pPtlgiudyOV1tcjb/LST3cm2gahRhoh/4VfxWpSlfml7KsO60oL8s5d4LmiMW7owuIYiIskkP8rgu260eo5qCA6lgWHzs1kxJoqSOuPifrl1rvR7N0qpuHuFFdEE3/yDHeFfg0wC65o0Gk/Z+t5wFGyonuyKcJm0JEu9Lo+iO75K7TQcDO1k6caFYbZU3GP0KBPIg0CmUnzXGfR5s56PCvqD+F1zUkIls4X5HveZDVtfRGzoMD72PbTwu/bTrJ+9uLtyBETqWPW0/GUv3WO6+SE34LCbB1q1xAnqnbg7SMNW11msW3PxvbGDfrx9t7L6uQcFQ==
+
+      extensions:
+        # - gabrielgrinberg.auto-run-command
+        # - ms-vsliveshare.vsliveshare
+        # - vscodevim.vim
+        - ms-vscode.go
+        - dracula-theme.theme-dracula
+        - jakebecker.elixir-ls
+        - PeterJausovec.vscode-docker
+        - editorconfig.editorconfig
+        - iampeterbanjo.elixirlinter
+        - eamodio.gitlens
+        - kumar-harsh.graphql-for-vscode
+        - mohsen1.react-javascript-to-typescript-transform-vscode
+        - wholroyd.jinja
+        - silvenon.mdx
+        - ms-vscode.node-debug2
+        - foxundermoon.shell-format
+        # - mauve.terraform
+        - mjmcloug.vscode-elixir
+        - sammkj.vscode-elixir-formatter
+        - redhat.vscode-yaml
+        # - ms-kubernetes-tools.vscode-kubernetes-tools
+        # - shan.code-settings-sync
+        - peterjausovec.vscode-docker
+        - ms-vscode.vscode-typescript-tslint-plugin
+        - redhat.vscode-yaml
 
       users:
         - "{{ user }}"
@@ -34,7 +61,7 @@ write_files:
         time: 06:00
       EOL
 
-      cd /root/ansible-roles && ansible-playbook main.yml
+      cd /root/ansible-roles && ansible-playbook main.vnc.yml
 
 runcmd:
   - /bin/bash -c '/root/install.sh'
